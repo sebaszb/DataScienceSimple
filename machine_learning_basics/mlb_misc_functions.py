@@ -1,5 +1,6 @@
 from random import random
 import numpy as np
+import pandas as pd
 
 def generate_dummy_probs_true_y():
     '''
@@ -38,3 +39,22 @@ def generate_dummy_probs_true_y():
         if probs[i] < 0:
             probs[i] = 0.001
     return true_y, probs
+
+def create_dummy_modeling_table(size=10000):
+    '''
+    This function creates a pandas table that resembles 
+    a typical modeling table.
+    '''
+    
+    #Create the table
+    model_table = pd.DataFrame()
+    
+    #Create the columns
+    model_table["row_id"] = [i for i in range(0, size)]
+    model_table["feature_1"] = list(np.random.randint(0, 10, size))
+    model_table["feature_2"] = list(np.random.randint(0, 5, size))
+    model_table["feature_3"] = list(np.random.randint(0, 5, size))
+    model_table["feature_4"] = list(np.random.normal(10, 1, size))
+    model_table["target"] = list(np.random.randint(0, 2, size))
+    
+    return model_table
