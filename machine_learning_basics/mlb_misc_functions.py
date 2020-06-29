@@ -58,3 +58,57 @@ def create_dummy_modeling_table(size=10000):
     model_table["target"] = list(np.random.randint(0, 2, size))
     
     return model_table
+
+def create_clf_table_1(size):
+    '''
+    This function creates a dummy table that resembles the data you would 
+    find in a true modeling table where we have a row identifier, 5 features,
+    and a target. In this case the target takes the values 1 or 0.
+    '''
+    data = pd.DataFrame()
+    
+    data["row_id"] = [i for i in range(0, size)]
+    
+    data["feature_1"] = list(np.random.randint(-10, 10, size))
+    data["feature_2"] = list(np.random.randint(-10, 10, size)) 
+    data["feature_3"] = list(np.random.randint(-10, 10, size))
+    data["feature_4"] = list(np.random.randint(-10, 10, size))
+    data["feature_5"] = list(np.random.randint(-10, 10, size))
+    
+    data["target"] = data.apply(create_target_1, axis=1)
+    return data
+
+def function_grade3(x, y, z, w, k):
+    '''
+    This function takes in 5 values: x, y, z, w, k and returns:
+    x + y + z + w + k +  
+    (x*y) + (x*z) + (x*w) + (x*k) + (y*z) + (y*w) + (y*k) + (z*w) + (z*k) + (w*k) + 
+    (x**3) + (y**3) + (z**3) + (w**3) + (k**3)
+    '''
+    linear = x + y + z + w + k
+    interactions = (x*y) + (x*z) + (x*w) + (x*k) + (y*z) + (y*w) + (y*k) + (z*w) + (z*k) + (w*k)
+    cubes = (x**3) + (y**3) + (z**3) + (w**3) + (k**3)
+    value = linear + interactions + cubes
+    return  value 
+
+def create_target_1(row):
+    '''
+    This function creates the target (1 or 0) using the function
+    function_grade3
+    '''
+    x_val = row["feature_1"]
+    y_val = row["feature_2"]
+    z_val = row["feature_3"]
+    w_val = row["feature_4"]
+    k_val = row["feature_5"]
+    value =  function_grade3(x_val, y_val, z_val, w_val, k_val)
+    random_var = np.random.uniform(-300, 300, 1)[0]
+    value = value + random_var
+    
+    value_clf = 0
+    
+    if value >= 0:
+        value_clf = 1
+    if value < 0:
+        value_clf = 0
+    return value_clf
