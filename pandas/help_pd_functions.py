@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from random import randint
 
 def create_pd_table():
     '''
@@ -101,4 +102,18 @@ def create_pd_table2():
                           89,
                           99
                          ]
+    return df
+
+def create_pd_table3():
+    #Create table
+    df = pd.DataFrame()
+    
+    #Id column (not unique)
+    df["id"] = [randint(1, 5) for i in range(0, 20)]
+    
+    #Team
+    df["team"] = [randint(1, 3) for i in range(0, 20)]
+    
+    #Score
+    df["score"] = [randint(0, 100) for i in range(0, 20)]
     return df
