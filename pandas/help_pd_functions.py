@@ -117,3 +117,72 @@ def create_pd_table3():
     #Score
     df["score"] = [randint(0, 100) for i in range(0, 20)]
     return df
+
+def create_pd_table4():
+    '''
+    This function creates a pandas table with the following columns:
+    * car_id: Unique car identifier
+    * make: Make of the car
+    * year: Year of the car
+    * price: current price
+    
+    '''
+    
+    #Creates the table
+    df = pd.DataFrame()
+    
+    #Car id column
+    df["car_id"] = [i for i in range(1,11)]
+    
+    #Car make
+    df["make"] = ["Mazda",
+                  "Toyota",
+                  "Ferrari",
+                  "Nissan",
+                  "Honda",
+                  "Kia",
+                  "Ford",
+                  "Chevrolet",
+                  "Tesla",
+                  None
+                 ]
+    
+    #Car year
+    df["year"] = [2010, 
+                  2015,
+                  2017,
+                  None,
+                  2006,
+                  2010,
+                  2013,
+                  2019,
+                  2020,
+                  2018
+                 ]
+    
+    #Car price
+    df["price"] = [5000,
+                   7000,
+                   None,
+                   15000,
+                   60000,
+                   3000,
+                   8000,
+                   7500,
+                   50000,
+                   10000
+                  ]
+    
+    #Car mileage
+    df["miles"] = [120000,
+                   30000,
+                   10000,
+                   200000,
+                   150000,
+                   50000,
+                   80000,
+                   5000,
+                   None,
+                   30000
+                  ]
+    return df
