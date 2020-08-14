@@ -4,7 +4,7 @@ from random import randint
 
 def create_pd_table():
     '''
-    This function creates a table with 3 columns:
+    This function creates a table with 4 columns:
     * student_id: Unique row identifier
     * exam_1: Random number between 0 and 10
     * exam_2: Random number between 0 and 10

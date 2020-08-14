@@ -9,6 +9,9 @@ from pyspark.sql.functions import concat_ws
 
 spark = pyspark.sql.SparkSession.builder.enableHiveSupport().getOrCreate()
 
+import pandas as pd
+import numpy as np
+
 
 def create_players_table():
     '''
@@ -75,3 +78,26 @@ def create_ranking_table():
     
     ranking_table = spark.createDataFrame(ranking_info, ["Player_id", "Ranking"])
     return ranking_table
+
+def create_sp_table1():
+    '''
+    This function creates a spark table with 4 columns:
+    * student_id: Unique row identifier
+    * exam_1: Random number between 0 and 10
+    * exam_2: Random number between 0 and 10
+    * exam_3: Random number between 0 and 10
+
+    The table has 1000 rows.
+
+    '''
+    #Create table
+    pd_df = pd.DataFrame()
+    
+    #create columns
+    pd_df["student_id"] = [i for i in range(1, 1001)]
+    pd_df["exam_1"] = [np.random.randint(0, 11) for i in range(1, 1001)]
+    pd_df["exam_2"] = [np.random.randint(0, 11) for i in range(1, 1001)]
+    pd_df["exam_3"] = [np.random.randint(0, 11) for i in range(1, 1001)]
+    
+    df = spark.createDataFrame(pd_df)
+    return df
