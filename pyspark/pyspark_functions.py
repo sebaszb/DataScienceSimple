@@ -11,6 +11,7 @@ spark = pyspark.sql.SparkSession.builder.enableHiveSupport().getOrCreate()
 
 import pandas as pd
 import numpy as np
+from random import randint
 
 
 def create_players_table():
@@ -100,4 +101,20 @@ def create_sp_table1():
     pd_df["exam_3"] = [np.random.randint(0, 11) for i in range(1, 1001)]
     
     df = spark.createDataFrame(pd_df)
+    return df
+
+def create_sp_table3():
+    #Create table
+    df_pd = pd.DataFrame()
+    
+    #Id column (not unique)
+    df_pd["id"] = [randint(1, 5) for i in range(0, 20)]
+    
+    #Team
+    df_pd["team"] = [randint(1, 3) for i in range(0, 20)]
+    
+    #Score
+    df_pd["score"] = [randint(0, 100) for i in range(0, 20)]
+    
+    df = spark.createDataFrame(df_pd)
     return df
