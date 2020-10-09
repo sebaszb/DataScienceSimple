@@ -201,3 +201,89 @@ def create_sp_table3():
     
     df = spark.createDataFrame(df_pd)
     return df
+
+def create_sp_table4():
+    '''
+    This function creates a spark table with 6 column:
+
+    * participant_id
+    * name
+    * last_name
+    * age
+    * score_game_1
+    * score_game_2
+
+    All columns but participant_id contain null values
+    '''
+    
+    #Create table
+    df = pd.DataFrame()
+    
+    #Add row id
+    df["participant_id"] = [i for i in range(1, 11)]
+    
+    #Add name
+    df["name"] = [None,
+                  "Liam",
+                  "Olivia",
+                  "Jackson",
+                  None,
+                  "Oliver",
+                  "Lucas",
+                  None,
+                  "Aria",
+                  "Amelia"
+                 ]
+    
+    #Add last name
+    df["last_name"] = ["Lara",
+                       None,
+                       "Wilson",
+                       None,
+                       "Moore",
+                       "Leon",
+                       "Brown",
+                       None,
+                       "Robinson",
+                       None
+                      ]
+    #Add age
+    df["age"] = [27,
+                 None,
+                 25,
+                 24,
+                 26,
+                 None,
+                 24,
+                 31,
+                 None,
+                 29
+                ]
+    
+    df["score_game_1"] = [89,
+                         50,
+                         None,
+                         98,
+                         100,
+                         65,
+                         None,
+                         85,
+                         80,
+                         None
+                        ]
+    
+    
+    df["score_game_2"] = [None,
+                          None,
+                          70,
+                          90,
+                          89,
+                          70,
+                          75,
+                          79,
+                          None,
+                          99
+                         ]
+    
+    sp_df = spark.createDataFrame(df)
+    return sp_df
