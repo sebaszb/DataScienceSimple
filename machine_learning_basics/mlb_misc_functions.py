@@ -1,3 +1,4 @@
+from sklearn.model_selection import train_test_split
 from random import random
 import numpy as np
 import pandas as pd
@@ -112,3 +113,37 @@ def create_target_1(row):
     if value < 0:
         value_clf = 0
     return value_clf
+
+def prep_model_data(df_pd, target, features):
+    '''
+    This function prepares the data for training and testing (80/20).
+    The function takes in:
+    * df_pd: Pandas data frame
+    * target: list containing one element with the name of the target column
+    * features: list containing the name of the features (columns)
+    
+    The function returns:
+    * train_x: List of lists containing numbers. Each sub-list represents the features for each
+      observation in the training set.
+    * train_y: List containing numbers. Each number represents the target for each
+      observation in the training set.
+    * test_x: List of lists containing numbers. Each sub-list represents the features for each
+      observation in the testing set.
+    * test_y: List containing numbers. Each number represents the target for each
+      observation in the testing set.
+    '''
+    
+    #split the data into training and testing
+    model_train, model_test = train_test_split(df_pd, test_size=0.20, random_state=11)
+    
+    #Create arrays witht he "x values" (features) and the "y values" (targets) 
+    #for the train data
+    train_x = model_train[features].values
+    train_y = np.ravel(model_train[target].values)
+    
+    #Create arrays witht he "x values" (features) and the "y values" (targets) 
+    #for the test data
+    test_x = model_test[features].values
+    test_y = np.ravel(model_test[target].values)
+    
+    return train_x, train_y, test_x, test_y
