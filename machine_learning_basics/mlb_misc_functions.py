@@ -147,3 +147,14 @@ def prep_model_data(df_pd, target, features):
     test_y = np.ravel(model_test[target].values)
     
     return train_x, train_y, test_x, test_y
+
+def create_dummy_scores(num):
+    '''
+    This functin generates a list containing random
+    numbers in the range 0 to 1. the argument "num" 
+    determines the number of elements in the list.
+    '''
+    score = []
+    for i in range(0, num):
+            score.append(random())
+    return score
