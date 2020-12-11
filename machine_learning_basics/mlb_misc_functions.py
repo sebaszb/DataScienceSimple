@@ -158,3 +158,16 @@ def create_dummy_scores(num):
     for i in range(0, num):
             score.append(random())
     return score
+
+def obtain_train_clf_data():
+    #create data
+    data = create_clf_table_1(10000)
+    
+    #target and features names
+    target = ["target"]
+    features = ["feature_1", "feature_2", "feature_3", "feature_4", "feature_5"]
+    
+    #Prep the data for training
+    tr_x, tr_y, _, _ = prep_model_data(data, target, features)
+    
+    return tr_x, tr_y
